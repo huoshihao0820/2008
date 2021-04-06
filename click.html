@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ul>
+        <li>AA</li>
+        <li>BB</li>
+        <li>CC</li>
+        <li>DD</li>
+        <li>EE</li>
+    </ul>
+</body>
+</html>
+<script>
+var index=''
+    var li=document.querySelectorAll('li');
+    for (var i=0;i<li.length;i++){
+        li[i].index=i;
+        li[i].onclick=function () {
+            alert(this.index)
+        }
+    }
+</script>

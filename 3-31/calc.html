@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+//    function calc() {
+//        function add(a,b){
+//            var num=parseInt(a)+parseInt(b);
+//            return num;
+//        }
+//        function minus(a,b) {
+//            var num=parseInt(a)-parseInt(b)
+//            return num;
+//        }
+//        function multi(a,b) {
+//            var num=parseInt(a)*parseInt(b);
+//            return num;
+//        }
+//        function divi(a,b) {
+//            var num=parseInt(a)/parseInt(b)
+//            return num;
+//        }
+//    }
+
+
+    var calc={
+        add:function (a,b) {
+            var num=parseInt(a)+parseInt(b);
+            return num;
+        },
+        miuns:function (a,b) {
+            var num=parseInt(a)-parseInt(b)
+           return num;
+        },
+       multi: function (a,b) {
+            var num=parseInt(a)*parseInt(b);
+            return num;
+        },
+        divi: function (a,b) {
+            var num=parseInt(a)/parseInt(b)
+            return num;
+        }
+    }
+
+    var obj={}    //定义一个空的对象
+    obj.add=function (a,b) {
+        var num=a+b
+        return num
+    }
+
+console.log(calc.add(200,100))
+console.log(calc.miuns(200,100))
+console.log(calc.multi(200,100))
+console.log(calc.divi(200,100))
+console.log(obj.add(200,100))
+</script>
+</body>
+</html>
