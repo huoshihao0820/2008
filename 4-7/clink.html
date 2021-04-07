@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+//    $.ajax({
+//       url:""  , //请求地址
+//       method:"", //get
+//       data:{},   //发送的数据
+//       dateType:"",// json
+//       success:function () {},//请求成功回调函数
+//       error:function () {},//失败处理的函数
+//   })
+    $ajax("http://127.0.0.1/4-7/php.php","get")
+
+   function $ajax(urls,get) {
+       let xhr=new XMLHttpRequest();
+       xhr.onreadystatechange=function () {
+           if(xhr.readyState==4 && xhr.status==200){
+               console.log(xhr.responseText)
+               //接收服务器相应的数据
+               let json_str=xhr.responseText
+               //将接送字符串转为js对象
+               
+           }
+       }
+
+       //打开链接
+       xhr.open(get,urls)
+
+       //发送请求
+       xhr.send();
+
+
+   }
+    
+    
+    
+//    //实例化
+//    let xhr=new XMLHttpRequest();
+//
+//    //监听状态
+//    xhr.onreadystatechange=function () {
+//        if(xhr.readyState==4 && xhr.status==200){
+//            console.log(xhr.responseText)
+//            //接收服务器相应的数据
+//            let json_str=xhr.responseText
+//            //将接送字符串转为js对象
+//            let obj=JSON.parse(json_str)
+//            console.log(obj)
+//            console.log(obj.name)
+//        }
+//    }
+//
+//    //打开链接
+//    xhr.open("get","http://127.0.0.1/4-7/php.php")
+//
+//    //发送请求
+//    xhr.send();
+</script>
+</body>
+</html>

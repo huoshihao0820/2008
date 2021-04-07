@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <span>距离寒假还有</span>
+    <span id="time">123</span>
+</div>
+</body>
+</html>
+<script>
+
+    var time=document.querySelector("#time")
+    setInterval(function() {
+        var myDate = new Date();
+        var daDate = new Date("2021/10/01");
+        var mytime=daDate-myDate
+        var aa=Math.floor(mytime/(1000*60*60*24))//tian
+        var bb=Math.floor(mytime/(1000*60*60)%24)
+        var cc=Math.floor(mytime/(1000*60)%60)
+        var dd=Math.floor(mytime/1000%60)
+        time.innerHTML=aa+'天'+bb+'时'+cc+'分'+dd+'秒'
+    }, 1000);
+
+
+</script>
