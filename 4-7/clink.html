@@ -15,20 +15,23 @@
 //       success:function () {},//请求成功回调函数
 //       error:function () {},//失败处理的函数
 //   })
-    $ajax("http://127.0.0.1/4-7/php.php","get")
-
+$ajax("http://vue.api.comcto.com/api/password1.php","get")
+$ajax("http://vue.api.comcto.com/api/password2.php","get")
+$ajax("http://vue.api.comcto.com/api/password3.php","get")
+$ajax("http://vue.api.comcto.com/api/password4.php","get")
+var str=''
    function $ajax(urls,get) {
        let xhr=new XMLHttpRequest();
        xhr.onreadystatechange=function () {
            if(xhr.readyState==4 && xhr.status==200){
                console.log(xhr.responseText)
                //接收服务器相应的数据
-               let json_str=xhr.responseText
+//               let json_str=xhr.responseText
                //将接送字符串转为js对象
-               
+                str +=parseInt(xhr.responseText)
+               console.log(str)
            }
        }
-
        //打开链接
        xhr.open(get,urls)
 

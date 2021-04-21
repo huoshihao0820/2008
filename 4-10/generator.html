@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var obj={
+        name:"zhangsan",
+        age:11,
+        sex:'nan'
+    }
+    function *it() {
+        let keys=Object.keys(this);
+        for(let k of keys){
+            yield [k,this[k]]
+        }
+    }
+    obj[Symbol.iterator]=it;
+        for(let k of obj){
+            console.log(k)
+        }
+</script>
+</body>
+</html>
+<script>
+    var obj={
+        name:'zhangsan',
+        age:11,
+        sex:'nan'
+    }
+    function *it() {
+        let keys=Object.keys(this)
+        for (let k of keys){
+            yield k
+        }
+    }
+    obj[Symbol.iterator]=it;
+    for(let k of obj){
+        console.log(k)
+    }
+</script>

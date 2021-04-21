@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+    <script src="../axios.min.js"></script>
+</head>
+<body>
+<div id="app">
+    用户名：<input type="text" name="name" v-model="question"><span>{{ answer }}</span>
+</div>
+</body>
+</html>
+<script>
+    new Vue({
+        el:'#app',
+        data:{
+            question:'',
+            answer:""
+        },
+        watch:{
+            question(nv,ol){
+                _this=this
+                this.answer="正在发送数据"
+                    axios.get("http://vue.api.comcto.com/api/checkname.php?name="+nv).then(function (d) {
+//                        console.log(d)
+                        _this.answer=d.data.msg
+                    })
+            }
+
+        },
+
+
+    })
+</script>

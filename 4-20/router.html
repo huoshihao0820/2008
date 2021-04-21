@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+    <script src="../vue-router.js"></script>
+</head>
+<body>
+<div id="app">
+    <router-link to="/user/1">点击</router-link>
+    <router-view></router-view>
+</div>
+<script>
+    const userX = {
+        props:['id'],
+        template:`<span> {{ id }}的世界</span>`
+    }
+
+    const r=[
+        {path:'/user/:id',component:userX,props:{id:222}}
+    ]
+    const router=new VueRouter({
+        routes:r
+    })
+    const app = new Vue({
+        el:'#app',
+        router:router
+    })
+
+</script>
+</body>
+</html>

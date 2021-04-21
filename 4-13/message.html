@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{ message }}</p>
+        <p>{{ hello }}</p>
+    </div>
+</body>
+</html>
+<script>
+    new Vue({
+        el:'#app',
+        data:{
+          message:'abcdefg'
+        },
+        computed:{
+            hello(){
+                console.log(this.message.split("").reverse().join(""))
+                return this.message.split("").reverse().join("")
+            }
+        }
+    })
+</script>

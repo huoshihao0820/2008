@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    $arr=[
+        "http://vue.api.comcto.com/api/password1.php",
+        "http://vue.api.comcto.com/api/password2.php",
+        "http://vue.api.comcto.com/api/password3.php",
+        "http://vue.api.comcto.com/api/password4.php",
+    ]
+    var str='';
+    new Promise(function (resolve,reject) {
+        $.ajax({
+            url: "http://vue.api.comcto.com/api/password1.php",
+            method: "get",
+            success: function (a) {
+                console.log("第一位数",a)
+                resolve(a)
+            }
+        }).then(function (a) {
+            console.log("接收到第一位参数",a)
+            new Promise(function (resolve,reject) {
+                $.ajax({
+                    url: "http://vue.api.comcto.com/api/password2.php",
+                    method: "get",
+                    success: function (data) {
+                        console.log("第二位数",data)
+                        resolve(a+data)
+                    }
+                })
+            }).then(function (b) {
+                console.log("接收到第二位参数",b)
+                new Promise(function (resolve,reject) {
+                    $.ajax({
+                        url: "http://vue.api.comcto.com/api/password3.php",
+                        method: "get",
+                        success: function (data) {
+                            console.log("第三位数",data)
+                            resolve(b+data)
+                        }
+                    })
+                }).then(function (c) {
+                    console.log("接收到第三位参数",c)
+                    new Promise(function (resolve,reject) {
+                        $.ajax({
+                            url: "http://vue.api.comcto.com/api/password4.php",
+                            method: "get",
+                            success: function (data) {
+                                console.log("第四位数",data)
+                                resolve(c+data)
+                            }
+                        })
+                    }).then(function (d) {
+                        console.log("接收到第三位参数",d)
+                    })
+                })
+            })
+        })
+
+    })
+
+
+
+
+</script>

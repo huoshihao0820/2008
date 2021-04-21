@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+    <script src="../axios.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="button" value="dianji" @click="btn">
+    <li v-for="item in data">
+    id:{{ item.id }}name:{{ item.name }}age{{ item.age }}sex:{{ item.sex}}
+    </li>
+</div>
+</body>
+</html>
+<script>
+
+    new Vue({
+        el:'#app',
+        data:{
+            data:[]
+        },
+        methods:{
+         btn(){
+             _this=this
+             axios.get(" http://vue.api.comcto.com/api/list.php")
+                 .then(function (response) {
+                 console.log(response.data);
+                 _this.data=response.data
+                 });
+         }
+        },
+    })
+</script>

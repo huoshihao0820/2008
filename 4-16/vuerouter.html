@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+    <script src="../vue-router.js"></script>
+    <style>
+        div{
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div>
+        <router-link to="/red">红色</router-link>
+        <br>
+        <router-link to="/darkblue">蓝色</router-link>
+        <br>
+        <router-link to="/yellow">黄色</router-link>
+        <br>
+        <router-link to="/white">白色</router-link>
+        <br>
+        <router-link to="/green">绿色</router-link>
+    </div>
+<div >
+    <router-view></router-view>
+</div>
+</div>
+
+</body>
+</html>
+<script>
+    const red={ template:`<div style="width: 200px; height: 200px; border:red solid 1px;background-color: red">red</div>`}
+    const darkblue={ template:`<div style="width: 200px; height: 200px; border:red solid 1px;background-color: darkblue">darkblue</div>`}
+    const yellow={ template:`<div style="width: 200px; height: 200px; border:red solid 1px;background-color: yellow">yellow</div>`}
+    const white={ template:`<div style="width: 200px; height: 200px; border:red solid 1px;background-color: white">white</div>`}
+    const green={ template:`<div style="width: 200px; height: 200px; border:red solid 1px;background-color: green">green</div>`}
+    const routes=[
+        {path:'/red',component:red},
+        {path:'/darkblue',component:darkblue},
+        {path:'/yellow',component:yellow},
+        {path:'/white',component:white},
+        {path:'/green',component:green},
+    ]
+    const router=new VueRouter({
+        routes
+    })
+    new Vue({
+        el:'#app',
+        router:router
+    })
+</script>

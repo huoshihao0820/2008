@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <books-list v-bind:books="list"></books-list>
+</div>
+</body>
+</html>
+<script src="../axios.min.js"></script>
+<script>
+    Vue.component('books-list',{
+        props:['books'],
+        template:`<ul><li v-for="item in books">{{ item.goods_id}}--{{item.goods_name}}</li></ul>`
+    })
+    new Vue({
+        el:'#app',
+        data:{
+            list:[]
+        },
+        methods:{
+
+        },
+        created(){
+            _this=this
+            axios.get("http://localhost:8080/list").then(function (d) {
+//                console.log(d)
+            _this.list=d.data
+        })
+        }
+    })
+</script>

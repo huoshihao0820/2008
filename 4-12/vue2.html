@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <button v-on:click="num1++">{{num1}}</button>
+    <button @click="num2++">{{num2}}</button>
+    <button @click="test1">点击1</button>
+    <button @click="test1()">点击2</button>
+    <button @click="test2(11,22)">点击3</button>
+
+    <a v-on:click.prevent="baidu" href="https://www.baidu.com" >Baidu</a>
+    <a  href="http://192.168.1.200" >老师</a>
+
+</div>
+
+</body>
+</html>
+<script>
+    new Vue({                   // 实例化  Vue
+        el: "#app",
+        data: {                 //数据
+            num1: 0,
+            num2: 0,
+        },
+        methods: {              // 方法
+            test1(){
+                this.num1++  // this指当前Vue实例  操作data中的num1
+                this.num2++  // 操作 data中的 num2
+                console.log("Hello world")
+            },
+            test2(a,b){
+                console.log(a,b)
+            },
+            baidu(){
+                alert("Baidu")
+            }
+        }
+    })
+
+</script>

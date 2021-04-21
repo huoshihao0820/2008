@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+    <script src="../vue-router.js"></script>
+</head>
+<body>
+<div id="app">
+    <router-link to="/user/login">登录</router-link>
+    <router-link :to="{name:'ureg'}">注册</router-link>
+    <router-view></router-view>
+</div>
+</body>
+</html>
+<script>
+    const userlogin={
+        template:`<h1>登录表单</h1>`
+    }
+    const ureg={
+        template:`<div>
+    <h2>注册</h2>
+    <router-link :to="{name:'telreg'}">电话注册</router-link>
+    <router-link to="emailreg">邮箱注册</router-link>
+    <router-view></router-view>
+</div>`
+    }
+    const emailreg={
+        template:`<div> <input type="text" placeholder="邮箱">  </div>`
+    }
+    const telreg={
+        template:  `<div><input type="text" placeholder="手机号"></div> `
+    }
+    const routes=[
+        {path:"/user/login",component:userlogin},
+        {path:"/ureg",name:"ureg",component:ureg,
+        children:[
+            {path:"/emailreg",name:"emailreg",component:emailreg},
+            {path:"/telreg",name:"telreg",component:telreg}
+        ]}
+    ]
+
+    const router=new VueRouter({routes})
+    new Vue({
+        el:'#app',
+        router
+    })
+</script>

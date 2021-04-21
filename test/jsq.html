@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>计算器</title>
+    <script src="./jquery.js"></script>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            user-select: none;
+        }
+        #jsq{
+            border: 1px solid lightgray;
+            display: inline-block;
+        }
+        .row{
+            display: flex;
+        }
+        .item{
+            border: 1px solid lightgray;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .item:hover{
+            background-color: lightgray;
+        }
+        .item:active{
+            opacity: 0.9;
+        }
+        #srk{
+            border: none;
+            width: 100%;
+            height: 100%;
+            outline: none;
+            font-size: 24px;
+            text-align: right;
+        }
+        .i2{
+            width: 112px;
+        }
+        .i4{
+            width: 236px;
+        }
+    </style>
+</head>
+<body>
+<div id="jsq">
+    <div class="row">
+        <div class="item i4">
+            <input type="texr" id="srk" placeholder="null"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="item">C</div>
+        <div class="item">←</div>
+        <div class="item">%</div>
+        <div class="item">÷</div>
+    </div>
+    <div class="row">
+        <div class="item">7</div>
+        <div class="item">8</div>
+        <div class="item">9</div>
+        <div class="item">×</div>
+    </div>
+    <div class="row">
+        <div class="item">4</div>
+        <div class="item">5</div>
+        <div class="item">6</div>
+        <div class="item">-</div>
+    </div>
+    <div class="row">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">+</div>
+    </div>
+    <div class="row">
+        <div class="item">0</div>
+        <div class="item">.</div>
+        <div class="item i2">=</div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    $(function(){
+        var $item = $('.item');
+        var $srk = $('#srk');
+        $item.click(function(){
+            var str = $(this).text();
+            switch(str){
+                case'C':
+                    $srk.val('');
+                    break;
+                case'←':
+                    $srk.val($srk.val().substr(0,$srk.val().length-1));
+                    break;
+                case'×':
+                    $srk.val($srk.val()+"*");
+                    break;
+                case'÷':
+                    $srk.val($srk.val()+"/");
+                    break;
+                case'=':
+                    var temp = eval($srk.val());
+                    $srk.val(temp);
+                    break;
+                default:
+                    $srk.val($srk.val()+str);
+                    break;
+            }
+        })
+    })
+</script>

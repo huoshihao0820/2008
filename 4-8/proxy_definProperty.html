@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let obj={
+        name:"zhangsan",
+        age:"22"
+    }
+    let p1=new Proxy(obj,{
+        defineProperty(target,property){
+            alert("不能修改");
+            return true
+        }
+    })
+
+//    p1.name="lisi";
+    Object.defineProperty(p1,"sex",{
+        value:111
+    })
+    console.log(p1)
+    console.log(Array.prototype)
+</script>
+</body>
+</html>

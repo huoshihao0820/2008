@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let obj={
+        name:"zhangsan",
+        age:"22"
+    }
+    let p1=new Proxy(obj,{
+        deleteProperty(target,property){
+            console.log("没有权限")
+        }
+    })
+    delete(p1.name)
+</script>
+</body>
+</html>

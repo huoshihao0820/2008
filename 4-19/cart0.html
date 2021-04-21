@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>购物车</title>
+  <script src="../vue.js"></script>
+  <script src="../vue-router.js"></script>
+  <script src="../axios.min.js"></script>
+  <style type="text/css">
+    .container {
+    }
+    .container .cart {
+      width: 500px;
+      /*backgroun-color: lightgreen;*/
+      margin: auto;
+    }
+    .container .title {
+      background-color: lightblue;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      /*color: #fff;*/
+    }
+    .container .total {
+      background-color: #FFCE46;
+      height: 50px;
+      line-height: 50px;
+      text-align: right;
+    }
+    .container .total button {
+      margin: 0 10px;
+      background-color: #DC4C40;
+      height: 35px;
+      width: 80px;
+      border: 0;
+    }
+    .container .total span {
+      color: red;
+      font-weight: bold;
+    }
+    .container .item {
+      height: 55px;
+      line-height: 55px;
+      position: relative;
+      border-top: 1px solid #ADD8E6;
+    }
+    .container .item img {
+      width: 45px;
+      height: 45px;
+      margin: 5px;
+    }
+    .container .item .name {
+      position: absolute;
+      width: 190px;
+      top: 0;left: 55px;
+      font-size: 16px;
+    }
+
+    .container .item .change {
+      width: 100px;
+      position: absolute;
+      top: 0;
+      right: 50px;
+    }
+    .container .item .change a {
+      font-size: 20px;
+      width: 30px;
+      text-decoration:none;
+      background-color: lightgray;
+      vertical-align: middle;
+    }
+    .container .item .change .num {
+      width: 40px;
+      height: 25px;
+    }
+    .container .item .del {
+      position: absolute;
+      top: 0;
+      right: 0px;
+      width: 40px;
+      text-align: center;
+      font-size: 40px;
+      cursor: pointer;
+      color: red;
+    }
+    .container .item .del:hover {
+      background-color: orange;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <div class="container">
+    <my-cat></my-cat>
+  </div>
+</div>
+<script>
+
+    const cattop={
+        template:`<div class="title">我的购物车</div>`
+    }
+    const  catlist={
+        props:['goods'],
+        template:` <div>
+                    <div class="item" v-for="(item,index) in goods">
+                    <div class="name">{{ item.name }}</div>
+                    <div class="change">
+                        <a href="javascript:;" @click="prev(index)">-</a>
+                        <input type="text" class="num" :value="item.number" @blur="change(index,$event)">
+                        <a href="javascript:;" @click="next(index)">+</a>
+</div>
+                    <div class="del" @click="del(index)">×</div>
+</div>
+
+                </div>`,
+        methods:{
+            prev(){
+                this.goods[index].number --
+            },
+            next(index){
+                console.log(index)
+                console.log(this.goods[0].number)
+                this.goods[index].number ++
+            },
+            del(index){
+                this.goods.splice(index,1)
+            },
+            change(index,ev){
+                this.goods[index].number = ev.target.value
+            }
+
+
+        }
+    }
+    const catfoolt={
+        props:['goods'],
+        template:`<div class="total">
+        <span>总价：{{ total }}</span>
+        <button>结算</button>
+      </div>`,
+        computed:{
+            total(){
+                let total=0
+                this.goods.forEach(function (v) {
+                    total+=v.number * v.price
+                })
+                return total
+            }
+        }
+    }
+    Vue.component("my-cat",{
+        data(){
+            return{
+                username:"huoshihao",
+                goods: [
+                    {"id":22,"name":"AOC冠捷 22","number":100,"user_id":20,"is_show":"1","price":1},
+                    {"id":542,"name":"绿联USB3. 2.5/3. ","number":100,"user_id":20,"is_show":"1","price":2},
+                    {"id":1173,"name":"V3高清电脑夜视","number":100,"user_id":20,"is_show":"1","price":3},
+                    {"id":42,"name":"金河田预见竞技/usb3.0","number":100,"user_id":20,"is_show":"1","price":4},
+                    {"id":166,"name":"sus/华硕1151九代 ","number":100,"user_id":20,"is_show":"1","price":5}
+                ]
+            }
+        },
+        components:{
+            "cat-top":cattop,
+            "cat-list":catlist,
+            "cat-foolt":catfoolt,
+        },
+        template:` <div class="cart">
+        <cat-top :username="username"></cat-top>
+        <cat-list :goods="goods"></cat-list>
+        <cat-foolt :goods="goods"></cat-foolt>
+    </div>`,
+
+    })
+    new Vue({
+        el:'#app',
+    })
+</script>
+</body>
+</html>
+
