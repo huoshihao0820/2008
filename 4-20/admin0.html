@@ -295,6 +295,7 @@
           },
         template: `<div>
         <h3>订单管理区域</h3>
+            <router-view></router-view>
         <table>
             <tr>
                 <th>订单id</th>
@@ -303,13 +304,15 @@
                 <th>收件人id</th>
                 <th>操作</th>
             </tr>
-            <tr v-for="item in orders">
+            <tr v-for="(item,index) in orders">
               <td>{{ item.order_id }}</td>
               <td>{{ item.order_sn }}</td>
               <td>{{ item.consignee }}</td>
               <td>{{ item.user_id }}</td>
               <td>
-                <a href="">删除</a>
+                <a href="javascript:;" @click="del(item.order_id,index)">删除</a>/
+                <!--<a href="javascript:;" @click="upd(item.order_id,index)">修改</a>/-->
+                <router-link :to="{path:'/orderinfo/'+item.order_id}">修改</router-link>
               </td>
             </tr>
           </table>
@@ -322,8 +325,65 @@
                       _this.orders=d.data
                   })
               },
+              del(order_id,index){
+                  let _this=this
+                  axios.post("http://localhost:8081/delorder",{order_id:order_id}).then(function (d) {
+                      let data=_this.orders.splice(index,1)
+                      _this.orders=_this.getorderlist()
+                  })
+              },
+              upd(order_id,index){
+                  this.$router.push('/orderinfo/' + order_id)
+              }
           }
       }
+      const OrderInfo = {
+          props: ['id'],
+          data(){
+              return {orderinfo:{}
+              }
+          },
+          template: `<div>
+          <h5>订单详情页 --- 用户Id为：{{id}}</h5>
+
+            <form action="">
+            <input type="text" v-model="orderinfo.order_sn"><br>
+            <input type="text" v-model="orderinfo.consignee"><br>
+            <input type="text" v-model="orderinfo.user_id"><br>
+            <input type="button" @click="upd(orderinfo.order_id)" value="修改">          <button @click="goorder()">后退</button>
+
+            </form>
+        </div>`,
+          methods: {
+              goback() {
+                  // 实现后退功能
+                  this.$router.go(-1)
+              },
+              upd(){
+                  _this=this
+                  axios.post("http://localhost:8081/updorder",this.orderinfo).then(function (d) {
+                      console.log(d)
+//                      _this.$router.go(-1)
+                      _this.$parent.getorderlist()
+                      _this.$router.push('/orders')
+//                      alert("修改成功");
+                  })
+              },
+              goorder(){
+                  this.$router.push('/orders')
+              }
+
+          },
+          created(){
+              let _this=this
+              axios.get("http://localhost:8081/findorder?id="+_this.id).then(function (d) {
+                  _this.orderinfo=d.data[0]
+              })
+
+          }
+      }
+
+
       const Settings = {
         template: `<div>
         <h3>系统设置区域</h3>
@@ -343,7 +403,9 @@
               ]},
               { path: '/rights', component: Rights },
               { path: '/goods', component: Goods },
-              { path: '/orders', component: Orders },
+              { path: '/orders', component: Orders,children:[
+                  { path: '/orderinfo/:id', component: OrderInfo, props: true },
+              ] },
               { path: '/settings', component: Settings },
               { path: '/goodsinfo/:id', component: Goodsinfo, props: true },
 
